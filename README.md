@@ -128,7 +128,7 @@ Download the latest release for Windows from the link below. Note that it might 
 
 ### 2. **Create `frpc.ini` File**
 
-In the same folder as `frpc.exe`, create a new file called `frpc.ini` and paste the following configuration:
+In the same folder as `frpc.exe`,  create a new file called `frpc.ini` and paste the following configuration:
 
 ```
 [common]
@@ -156,8 +156,7 @@ Replace `YOUR.VPS.IP` with your VPS's actual IP address.
 
 ### 3. **Start FRP**
 
-Open CMD , drag & drop frps.exe on to CMD window and press enter.
-![Alt text](img/image2.png)
+Open CMD , change directory to FRP folder with command:  CD C:\Users\Administrator\Desktop\frp_0.62.0_windows_amd64   <--- Replace this with YOur directory !!!
 
 ---
 
