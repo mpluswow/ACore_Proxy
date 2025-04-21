@@ -20,80 +20,85 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 ```sh
+nano install_tunel.sh
+```
+
+Copy and Paste this inside:
+
+```sh
+#!/bin/bash
+
+# Prompt for FRP dashboard username and password
+echo "Enter FRP Dashboard username:"
+read dashboard_user
+echo "Enter FRP Dashboard password:"
+read -s dashboard_pwd
+
+# Display the system user and dashboard user
+echo "Current system user: $USER"
+echo "Dashboard user: $dashboard_user"
+
+# Update and install FRP dependencies
+sudo apt update && sudo apt upgrade -y
+
+# Download FRP
 wget https://github.com/fatedier/frp/releases/download/v0.62.0/frp_0.62.0_linux_amd64.tar.gz
-```
-
-```sh
 tar -xzf frp_0.62.0_linux_amd64.tar.gz
-```
-
-```sh
 cd frp_0.62.0_linux_amd64
-```
 
-```sh
-nano frps.ini
-```
-
-In the `frps.ini` file, copy and paste the following configuration:
-
-```
+# Create frps.ini with user inputs
+cat <<EOL > frps.ini
 [common]
 bind_port = 7000
 dashboard_port = 7500
-dashboard_user = admin
-dashboard_pwd = yourpass
+dashboard_user = $dashboard_user
+dashboard_pwd = $dashboard_pwd
 token = supersecret
-```
+EOL
 
-(Press `Ctrl+X`, then `Y`, and hit `Enter` to save the file.)
+# Move FRP files to the user's home directory
+mkdir -p /home/$USER/frp_0.62.0_linux_amd64
+mv * /home/$USER/frp_0.62.0_linux_amd64/
 
----
-
-### 2. **Create the Systemd Service for FRP**
-
-```sh
-sudo nano /etc/systemd/system/frps.service
-```
-
-In the `frps.service` file, copy and paste the following content:
-
-```
+# Create systemd service for FRP using the system's current user ($USER)
+sudo cat <<EOL > /etc/systemd/system/frps.service
 [Unit]
 Description=FRP Server Service
 After=network.target
 
 [Service]
-User=root
-WorkingDirectory=/root/frp_0.62.0_linux_amd64
-ExecStart=/root/frp_0.62.0_linux_amd64/frps -c /root/frp_0.62.0_linux_amd64/frps.ini
+User=$USER
+WorkingDirectory=/home/$USER/frp_0.62.0_linux_amd64
+ExecStart=/home/$USER/frp_0.62.0_linux_amd64/frps -c /home/$USER/frp_0.62.0_linux_amd64/frps.ini
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
+EOL
+
+# Reload systemd, enable, and start the service
+sudo systemctl daemon-reload
+sudo systemctl enable frps
+sudo systemctl start frps
+
+echo "FRP server setup complete. Service started."
+
 ```
+
 
 (Press `Ctrl+X`, then `Y`, and hit `Enter` to save the file.)
 
----
-
-### 3. **Reload Systemd and Enable the Service**
 
 ```sh
-sudo systemctl daemon-reload
+chmod +x install_tunel.sh
 ```
 
 ```sh
-sudo systemctl enable frps
+./install_tunel.sh
 ```
 
-```sh
-sudo systemctl start frps
-```
 
----
-
-### 4. **Open Necessary Ports on Your VPS**
+### 2. **Open Necessary Ports on Your VPS**
 
 You need to open the following ports in your VPS network settings:
 
