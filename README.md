@@ -1,6 +1,6 @@
 by Dr3amforg3
 
-
+***Linux Part: ***
 1. On Linux VPS like Ubuntu copy and paste each command one by one:
 
 Commands:
@@ -91,7 +91,8 @@ type = tcp
 
 
 
-WINDOWS PART:
+
+*** WINDOWS PART: ***
 
 This file can show virus protection alert so You need to allow it to download, 
 it create tunel thats why Windows thinks its dangerous.
