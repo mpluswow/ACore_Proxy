@@ -24,7 +24,7 @@ cd frp_0.62.0_linux_amd64
 nano frps.ini
 ```
 
-Copy and Paste this (This will make it runn 24/7) :
+Copy and Paste this :
 
 ```
 [common]
@@ -49,14 +49,14 @@ Description=FRP Server Service
 After=network.target
 
 [Service]
-Type=simple
 User=root
-WorkingDirectory=/home/root/frp_0.62.0_linux_amd64
-ExecStart=/home/root/frp_0.62.0_linux_amd64/frps -c /home/your_username_here/frp_0.62.0_linux_amd64/frps.ini
+WorkingDirectory=/root/frp_0.62.0_linux_amd64
+ExecStart=/root/frp_0.62.0_linux_amd64/frps -c /root/frp_0.62.0_linux_amd64/frps.ini
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
+
 ```
 
 
@@ -67,11 +67,11 @@ sudo systemctl daemon-reload
 ```
 
 ```sh
-sudo systemctl start frps
+sudo systemctl enable frps
 ```
 
 ```sh
-sudo systemctl enable frps
+sudo systemctl start frps
 ```
 
 
