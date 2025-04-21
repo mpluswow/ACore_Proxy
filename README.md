@@ -156,7 +156,14 @@ Replace `YOUR.VPS.IP` with your VPS's actual IP address.
 
 ### 3. **Start FRP**
 
-Open CMD , change directory to FRP folder with command:  CD C:\Users\Administrator\Desktop\frp_0.62.0_windows_amd64   <--- Replace this with YOur directory !!!
+Open CMD , change directory to FRP folder with command: 
+```
+CD C:\Users\Administrator\Desktop\frp_0.62.0_windows_amd64   <--- Replace this with Your directory !!!
+```
+than run command :
+```
+frpc.exe -c frpc.ini
+```
 
 ---
 
