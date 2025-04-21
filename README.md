@@ -156,6 +156,8 @@ Replace `YOUR.VPS.IP` with your VPS's actual IP address.
 ### 3. **Configure Realmlist**
 
 Finally, in your WoW server's database, set the `realmlist` IP address to your VPS's IP.
+![Alt text](img/image.png)
+
 
 ---
 
