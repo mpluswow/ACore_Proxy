@@ -157,7 +157,7 @@ Replace `YOUR.VPS.IP` with your VPS's actual IP address.
 ### 3. **Start FRP**
 
 Open CMD , drag & drop frps.exe on to CMD window and press enter.
-
+![Alt text](img/image2.png)
 
 ---
 
