@@ -175,4 +175,3 @@ Finally, in your WoW server's database, set the `realmlist` IP address to your V
 
 ---
 
-That's it! You should now have a fully working FRP setup on both Linux and Windows. Let me know if you need any further help!
