@@ -14,11 +14,12 @@ This guide will help you set up FRP (Fast Reverse Proxy) on both a Linux VPS (li
 ### 1. **Set Up FRP Server on Linux VPS (Ubuntu)**
 
 Run the following commands one by one:
+Keep local version files when asked.
 
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
-Keep local version files when asked.
+
 
  
 ```sh
