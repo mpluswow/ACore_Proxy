@@ -18,7 +18,9 @@ Run the following commands one by one:
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
+Keep local version files when asked.
 
+ 
 ```sh
 nano install_tunel.sh
 ```
