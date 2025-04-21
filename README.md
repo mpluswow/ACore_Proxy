@@ -1,6 +1,6 @@
 by Dr3amforg3
 
-***Linux Part: ***
+**Linux Part: **
 1. On Linux VPS like Ubuntu copy and paste each command one by one:
 
 Commands:
