@@ -53,8 +53,8 @@ tar -xzf frp_0.62.0_linux_amd64.tar.gz
 cd frp_0.62.0_linux_amd64
 rm frps.toml
 
-# Create frps.toml with user inputs
-cat <<EOL > frps.toml
+# Create frps.ini with user inputs
+cat <<EOL > frps.ini
 [common]
 bind_port = 7000
 token = "supersecret"
@@ -79,7 +79,7 @@ After=network.target
 [Service]
 User=$USER
 WorkingDirectory=/home/$USER/frp_0.62.0_linux_amd64
-ExecStart=/home/$USER/frp_0.62.0_linux_amd64/frps -c /home/$USER/frp_0.62.0_linux_amd64/frps.toml
+ExecStart=/home/$USER/frp_0.62.0_linux_amd64/frps -c /home/$USER/frp_0.62.0_linux_amd64/frps.ini
 Restart=on-failure
 
 [Install]
