@@ -151,9 +151,17 @@ remote_port = 8085
 
 Replace `YOUR.VPS.IP` with your VPS's actual IP address.
 
+
 ---
 
-### 3. **Configure Realmlist**
+### 3. **Start FRP**
+
+Open CMD , drag & drop frps.exe on to CMD window and press enter.
+
+
+---
+
+### 4. **Configure Realmlist**
 
 Finally, in your WoW server's database, set the `realmlist` IP address to your VPS's IP.
 ![Alt text](img/image.png)
