@@ -51,15 +51,19 @@ sudo apt update && sudo apt upgrade -y
 wget https://github.com/fatedier/frp/releases/download/v0.62.0/frp_0.62.0_linux_amd64.tar.gz
 tar -xzf frp_0.62.0_linux_amd64.tar.gz
 cd frp_0.62.0_linux_amd64
+rm frps.toml
 
-# Create frps.ini with user inputs
-cat <<EOL > frps.ini
+# Create frps.toml with user inputs
+cat <<EOL > frps.toml
 [common]
 bind_port = 7000
-dashboard_port = 7500
-dashboard_user = $dashboard_user
-dashboard_pwd = $dashboard_pwd
-token = supersecret
+token = "supersecret"
+
+[webServer]
+addr = "0.0.0.0"
+port = 7500
+user = "admin"
+password = "admin"
 EOL
 
 # Move FRP files to the user's home directory
@@ -75,7 +79,7 @@ After=network.target
 [Service]
 User=$USER
 WorkingDirectory=/home/$USER/frp_0.62.0_linux_amd64
-ExecStart=/home/$USER/frp_0.62.0_linux_amd64/frps -c /home/$USER/frp_0.62.0_linux_amd64/frps.ini
+ExecStart=/home/$USER/frp_0.62.0_linux_amd64/frps -c /home/$USER/frp_0.62.0_linux_amd64/frps.toml
 Restart=on-failure
 
 [Install]
