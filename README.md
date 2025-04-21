@@ -1,9 +1,20 @@
-by Dr3amforg3
 
-**Linux Part: **
-1. On Linux VPS like Ubuntu copy and paste each command one by one:
+---
 
-Commands:
+# FRP Server Setup Guide
+
+**by Dr3amforg3**
+
+This guide will help you set up FRP (Fast Reverse Proxy) on both a Linux VPS (like Ubuntu) and Windows, creating a tunnel for your server's communication.
+
+---
+
+## **Linux Setup**
+
+### 1. **Set Up FRP Server on Linux VPS (Ubuntu)**
+
+Run the following commands one by one:
+
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
@@ -24,7 +35,7 @@ cd frp_0.62.0_linux_amd64
 nano frps.ini
 ```
 
-Copy and Paste this :
+In the `frps.ini` file, copy and paste the following configuration:
 
 ```
 [common]
@@ -35,13 +46,17 @@ dashboard_pwd = yourpass
 token = supersecret
 ```
 
----(press ctrl+x than Y than enter to save it.)
+(Press `Ctrl+X`, then `Y`, and hit `Enter` to save the file.)
+
+---
+
+### 2. **Create the Systemd Service for FRP**
 
 ```sh
 sudo nano /etc/systemd/system/frps.service
 ```
 
----Copy and Paste this:
+In the `frps.service` file, copy and paste the following content:
 
 ```
 [Unit]
@@ -56,11 +71,13 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
+(Press `Ctrl+X`, then `Y`, and hit `Enter` to save the file.)
 
----(press ctrl+x than Y than enter to save it.)
+---
+
+### 3. **Reload Systemd and Enable the Service**
 
 ```sh
 sudo systemctl daemon-reload
@@ -74,36 +91,33 @@ sudo systemctl enable frps
 sudo systemctl start frps
 ```
 
+---
 
-2. Open Ports on Your VPS probably network settings on the VPS website:
+### 4. **Open Necessary Ports on Your VPS**
 
-[tunel_port] 
-type = tcp
-7000
+You need to open the following ports in your VPS network settings:
 
-[auth_tcp]
-type = tcp
-3724
+- **7000**: FRP communication
+- **3724**: Authentication TCP
+- **8085**: World TCP
 
-[world_tcp]
-type = tcp
-8085
+You may need to adjust your VPS firewall or use the provider's control panel to allow these ports.
 
+---
 
+## **Windows Setup**
 
+### 1. **Download FRP for Windows**
 
-*** WINDOWS PART: ***
+Download the latest release for Windows from the link below. Note that it might show a virus protection warning due to its tunneling nature. Allow the download and proceed with the setup.
 
-This file can show virus protection alert so You need to allow it to download, 
-it create tunel thats why Windows thinks its dangerous.
-When you get a notyfication that threat was found, click on noptyfication , select allow by pressing arrow down next to file name.
+[Download FRP for Windows](https://github.com/fatedier/frp/releases/download/v0.62.0/frp_0.62.0_windows_amd64.zip)
 
+---
 
-```
-https://github.com/fatedier/frp/releases/download/v0.62.0/frp_0.62.0_windows_amd64.zip
-```
+### 2. **Create `frpc.ini` File**
 
-In the same folder as frpc.exe, create frpc.ini and paste this:
+In the same folder as `frpc.exe`, create a new file called `frpc.ini` and paste the following configuration:
 
 ```
 [common]
@@ -124,4 +138,14 @@ local_port = 8085
 remote_port = 8085
 ```
 
-in your database set realmlist ip adress to your VPS ip.
+Replace `YOUR.VPS.IP` with your VPS's actual IP address.
+
+---
+
+### 3. **Configure Realmlist**
+
+Finally, in your WoW server's database, set the `realmlist` IP address to your VPS's IP.
+
+---
+
+That's it! You should now have a fully working FRP setup on both Linux and Windows. Let me know if you need any further help!
